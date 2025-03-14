@@ -10,7 +10,7 @@
 - Tailwind CSS
 - Desktop and Mobile Versions
 
-
+ALSO SHOUTOUT TO THAO VANG: he helped me with getting rid of the number input incrementing buttons by letting me know the style portion to put in the index.html
 ### Peer Review
 
 

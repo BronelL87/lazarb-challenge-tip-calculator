@@ -42,60 +42,21 @@ const TipCalculatorComponent = () => {
       }
     };
   
-    const isValidCurrencyAmount = (value) => {
-      if (value == '') return true;
-      
-      const numValue = parseFloat(value);
-      if (isNaN(numValue)) return false;
-      
-      const parts = value.split('.');
-      if (parts.length > 1 && parts[1].length > 2) return false;
-      
-      return true;
-    };
-  
-    const isPositiveInteger = (value) => {
-      if (value == '') return true;
-      
-      const numValue = Number(value);
-      if (isNaN(numValue) || !Number.isInteger(numValue)) return false;
-      
-      return numValue > 0;
-    };
-  
-    const handleBillChange = (e) => {
-      const value = e.target.value;
-      if (isValidCurrencyAmount(value)) {
-        setBill(value);
-      }
+    const handleBillChange = (e) => setBill(e.target.value);
+    const handleCustomTipChange = (e) => {
+      setCustomTip(e.target.value);
+      setTipPercentage(null);
     };
   
     const handlePeopleChange = (e) => {
       const value = e.target.value;
-      
-      if (value == '') {
-        setPeople('');
-        setError('');
-      } else if (value == '0') {
-        setPeople('0');
-        setError("Can't be zero");
-      } else if (isPositiveInteger(value)) {
-        setPeople(value);
-        setError('');
-      }
+      setPeople(value);
+      setError(value === "0" ? "Can't be zero" : "");
     };
   
     const handleTipSelection = (percent) => {
       setTipPercentage(percent);
       setCustomTip('');
-    };
-  
-    const handleCustomTipChange = (e) => {
-      const value = e.target.value;
-      if (isValidCurrencyAmount(value)) {
-        setCustomTip(value);
-        setTipPercentage(null);
-      }
     };
   
     const handleReset = () => {
@@ -109,6 +70,7 @@ const TipCalculatorComponent = () => {
     };
   
     const isResetActive = bill || tipPercentage || customTip || people;
+
 
   return (
     <div className="bg-[#C5E4E7] min-h-screen flex flex-col items-center justify-center py-8">
@@ -125,7 +87,7 @@ const TipCalculatorComponent = () => {
               <img src={dollarIcon} alt="Dollar Icon" />
             </div>
             <input 
-              type="text"
+              type="number"
               value={bill}
               onChange={handleBillChange}
               placeholder="0"
@@ -146,7 +108,7 @@ const TipCalculatorComponent = () => {
               />
             ))}
             <input
-              type="text"
+              type="number"
               value={customTip}
               onChange={handleCustomTipChange}
               placeholder="Custom"
@@ -165,7 +127,7 @@ const TipCalculatorComponent = () => {
               <img src={personIcon} alt="Person Icon" />
             </div>
             <input
-              type="text"
+              type="number"
               value={people}
               onChange={handlePeopleChange}
               placeholder="0"
@@ -182,7 +144,7 @@ const TipCalculatorComponent = () => {
               <p className="text-white font-bold text-sm">Tip Amount</p>
               <p className="text-[#7F9C9F] text-xs">/ person</p>
             </div>
-            <p className="text-[#26C0AB] text-4xl font-bold">${tipAmount.toFixed(2)}</p>
+            <p className="text-[#26C0AB] text-4xl font-bold ">${tipAmount.toFixed(2)}</p>
           </div>
 
           <div className="flex justify-between items-center">
@@ -190,7 +152,7 @@ const TipCalculatorComponent = () => {
               <p className="text-white font-bold text-sm">Total</p>
               <p className="text-[#7F9C9F] text-xs">/ person</p>
             </div>
-            <p className="text-[#26C0AB] text-4xl font-bold">${total.toFixed(2)}</p>
+            <p className="text-[#26C0AB] text-4xl font-bold ">${total.toFixed(2)}</p>
           </div>
         </div>
 
