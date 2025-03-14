@@ -51,7 +51,7 @@ const TipCalculatorComponent = () => {
     const handlePeopleChange = (e) => {
       const value = e.target.value;
       setPeople(value);
-      setError(value === "0" ? "Can't be zero" : "");
+      setError(value == "0" ? "Can't be zero" : "");
     };
   
     const handleTipSelection = (percent) => {
